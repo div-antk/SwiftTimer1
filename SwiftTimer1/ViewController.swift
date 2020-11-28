@@ -8,17 +8,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-
   
   @IBOutlet weak var ImageView: UIImageView!
+  @IBOutlet weak var startButton: UIButton!
+  @IBOutlet weak var stopButton: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+    
+    // ストップボタンを押せなくする
+    stopButton.isEnabled = true
+    
   }
 
   @IBAction func start(_ sender: Any) {
     
+    startButton.isEnabled = true
   }
   
   
