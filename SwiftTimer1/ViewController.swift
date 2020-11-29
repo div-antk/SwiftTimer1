@@ -25,6 +25,21 @@ class ViewController: UIViewController {
     // ストップボタンを押せなくする
     stopButton.isEnabled = true
     
+    for i in 0..<5 {
+      let image = UIImage(named: "\(i)")
+      imageArray.append(image!)
+    }
+    
+    ImageView.image = UIImage(named: "0")
+  }
+  
+  @IBAction func start(_ sender: Any) {
+
+    startTimer()
+
+    // startButtonを押せるようにする
+    startButton.isEnabled = false
+    stopButton.isEnabled = true
   }
   
   func startTimer() {
@@ -32,21 +47,25 @@ class ViewController: UIViewController {
     timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
   }
 
+  // 0.2秒毎に呼ばれる
   @objc func timerUpdate() {
-    // 0.2秒毎に呼ばれる
-    count = count + 1
-    
+
     ImageView.image = imageArray[count]
-  }
-  
-  @IBAction func start(_ sender: Any) {
     
-    startButton.isEnabled = true
+    count = count + 1
+
+    if count > 4 {
+      count = 0
+    }
   }
-  
   
   @IBAction func stop(_ sender: Any) {
     
+    // startButtonを押せないようにする
+    startButton.isEnabled = true
+    stopButton.isEnabled = false
+    
+    timer.invalidate()
   }
 }
 
